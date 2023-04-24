@@ -20,7 +20,7 @@ export default function Component() {
     data?.generalSettings;
   const primaryMenu = data?.headerMenuItems?.nodes ?? [];
   const footerMenu = data?.footerMenuItems?.nodes ?? [];
-
+console.log('GetPageData', gql);
   return (
     <>
       <SEO title={siteTitle} description={siteDescription} />
@@ -60,6 +60,33 @@ Component.query = gql`
     footerMenuItems: menuItems(where: { location: $footerLocation }) {
       nodes {
         ...NavigationMenuItemFragment
+      }
+    }
+      page(id: 51, idType: DATABASE_ID) {
+        homeOptions {
+          heroImage {
+            id
+          }
+          heroH1
+          heroCopy
+          ctaBtn1
+          hornsH2
+          card1
+          card2
+          card3
+          weAreH2
+          weAreCopy
+          weAreBtnUrl
+          weAreBtnText
+          trustH2
+          trustCode
+          weServeH2
+          servicesH2
+          studiesH2
+          studiesCopy
+          studiesBtnUrl
+          studiesBtnText
+          ctaBtn2
       }
     }
   }
