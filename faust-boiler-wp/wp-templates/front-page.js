@@ -1,4 +1,5 @@
 import { useQuery, gql } from '@apollo/client';
+import Image from 'next/image';
 import * as MENUS from '../constants/menus';
 import { BlogInfoFragment } from '../fragments/GeneralSettings';
 import {
@@ -11,7 +12,7 @@ import {
   SEO,
 } from '../components';
 
-export default function Component() {
+export default function Component(props) {
   const { data } = useQuery(Component.query, {
     variables: Component.variables(),
   });
@@ -20,7 +21,8 @@ export default function Component() {
     data?.generalSettings;
   const primaryMenu = data?.headerMenuItems?.nodes ?? [];
   const footerMenu = data?.footerMenuItems?.nodes ?? [];
-console.log('GetPageData', gql);
+  const { heroImage, heroH1, heroCopy } = props?.data?.page.homeOptions ?? [];
+
   return (
     <>
       <SEO title={siteTitle} description={siteDescription} />
@@ -34,6 +36,13 @@ console.log('GetPageData', gql);
           <Hero title={siteTitle} />
           <div className="text-center">
             {siteDescription}
+            <Image 
+                    src={heroImage.sourceUrl}
+                    alt={heroImage.altText}
+                    width={heroImage.mediaDetails.width}
+                    height={heroImage.mediaDetails.height} />
+            <h1>{heroH1}</h1>
+            <p>{heroCopy}</p>
           </div>
         </Container>
       </Main>
@@ -49,6 +58,39 @@ Component.query = gql`
     $headerLocation: MenuLocationEnum
     $footerLocation: MenuLocationEnum
   ) {
+    page(id: 51, idType: DATABASE_ID)  {
+      homeOptions {
+        heroImage {
+          id
+          sourceUrl
+          altText
+          mediaDetails {
+            width
+            height
+          }
+        }
+        heroH1
+        heroCopy
+        ctaBtn1
+        hornsH2
+        card1
+        card2
+        card3
+        weAreH2
+        weAreCopy
+        weAreBtnUrl
+        weAreBtnText
+        trustH2
+        trustCode
+        weServeH2
+        servicesH2
+        studiesH2
+        studiesCopy
+        studiesBtnUrl
+        studiesBtnText
+        ctaBtn2
+      }
+    }
     generalSettings {
       ...BlogInfoFragment
     }
@@ -60,33 +102,6 @@ Component.query = gql`
     footerMenuItems: menuItems(where: { location: $footerLocation }) {
       nodes {
         ...NavigationMenuItemFragment
-      }
-    }
-      page(id: 51, idType: DATABASE_ID) {
-        homeOptions {
-          heroImage {
-            id
-          }
-          heroH1
-          heroCopy
-          ctaBtn1
-          hornsH2
-          card1
-          card2
-          card3
-          weAreH2
-          weAreCopy
-          weAreBtnUrl
-          weAreBtnText
-          trustH2
-          trustCode
-          weServeH2
-          servicesH2
-          studiesH2
-          studiesCopy
-          studiesBtnUrl
-          studiesBtnText
-          ctaBtn2
       }
     }
   }
