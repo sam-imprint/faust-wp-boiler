@@ -1,5 +1,6 @@
 import { useQuery, gql } from '@apollo/client';
 import Image from 'next/image';
+import Link from 'next/link';
 import * as MENUS from '../constants/menus';
 import { BlogInfoFragment } from '../fragments/GeneralSettings';
 import {
@@ -36,11 +37,16 @@ export default function Component(props) {
           <Hero title={siteTitle} />
           <div className="text-center">
             {siteDescription}
+            <Link href="/">
+            <a>
             <Image 
                     src={heroImage.sourceUrl}
                     alt={heroImage.altText}
                     width={heroImage.mediaDetails.width}
-                    height={heroImage.mediaDetails.height} />
+                    height={heroImage.mediaDetails.height}
+                    priority='true' />
+              </a>
+              </Link>
             <h1>{heroH1}</h1>
             <p>{heroCopy}</p>
           </div>
