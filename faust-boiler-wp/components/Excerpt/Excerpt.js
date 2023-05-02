@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { FeaturedImage } from '../FeaturedImage';
 import { PostInfo } from '../PostInfo';
-import styles from './Post.module.scss';
+import styles from './Excerpt.module.scss';
 
 export default function Post({
   title,
