@@ -5,7 +5,7 @@ import styles from './Post.module.scss';
 
 export default function Post({
   title,
-  content,
+  excerpt,
   date,
   author,
   uri,
@@ -33,7 +33,7 @@ export default function Post({
       <PostInfo date={date} author={author} className={styles.postInfo} />
       <div
         className={styles.content}
-        dangerouslySetInnerHTML={{ __html: content }}
+        dangerouslySetInnerHTML={{ __html: excerpt }}
       />
     </article>
   );

@@ -8,7 +8,7 @@ import {
   Container,
   EntryHeader,
   NavigationMenu,
-  Post,
+  Excerpt,
   FeaturedImage,
   SEO,
 } from '../components';
@@ -33,9 +33,9 @@ export default function Component(props) {
           <EntryHeader title={`Category: ${name}`} />
           <Container>
             {posts.edges.map((post) => (
-              <Post
+              <Excerpt
                 title={post.node.title}
-                content={post.node.content}
+                excerpt={post.node.excerpt}
                 date={post.node.date}
                 author={post.node.author?.node.name}
                 uri={post.node.uri}
@@ -68,6 +68,7 @@ Component.query = gql`
               id
               title
               content
+              excerpt
               date
               uri
               ...FeaturedImageFragment
