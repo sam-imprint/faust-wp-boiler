@@ -22,7 +22,7 @@ export default function Component(props) {
     data?.generalSettings;
   const primaryMenu = data?.headerMenuItems?.nodes ?? [];
   const footerMenu = data?.footerMenuItems?.nodes ?? [];
-  const { heroImage, heroH1, heroCopy } = props?.data?.page.homeOptions ?? [];
+  const { heroImage, heroH1, heroCopy, ctaBtn1 } = props?.data?.page.homeOptions ?? [];
 
   return (
     <>
@@ -49,6 +49,7 @@ export default function Component(props) {
               </Link>
             <h1>{heroH1}</h1>
             <p>{heroCopy}</p>
+            <button>{ctaBtn1}</button>
           </div>
         </Container>
       </Main>
